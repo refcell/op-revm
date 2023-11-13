@@ -8,6 +8,7 @@ extern crate alloc;
 fn main() {
     // BenchmarkDB is dummy state that implements Database trait.
     let mut evm = revm::new();
+    evm.database(BenchmarkDB::new_bytecode(Bytecode::new()));
 
     // execution globals block hash/gas_limit/coinbase/timestamp..
     evm.env.tx.caller = "0x0000000000000000000000000000000000000001"
@@ -19,9 +20,6 @@ fn main() {
             .parse()
             .unwrap(),
     );
-    //evm.env.tx.data = Bytes::from(hex::decode("30627b7c").unwrap());
-
-    evm.database(BenchmarkDB::new_bytecode(Bytecode::new()));
 
     // Microbenchmark
     let bench_options = microbench::Options::default().time(Duration::from_secs(1));
@@ -35,5 +33,9 @@ fn main() {
         let _ = evm.transact().unwrap();
     }
     let elapsed = time.elapsed();
-    println!("10k runs in {:?}", elapsed.as_nanos() / 10_000);
+    println!(
+        "10k transfer runs in {:?} [{:.3}ms]",
+        elapsed,
+        (elapsed.as_millis() as f64) / (10_000 as f64)
+    );
 }

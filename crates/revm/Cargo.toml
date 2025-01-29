@@ -32,6 +32,7 @@ cfg-if = "1.0"
 dyn-clone = "1.0"
 
 # Optional
+bls12_381 = { version = "0.8", optional = true }
 once_cell = { version = "1.19", default-features = false, features = [
     "alloc",
 ], optional = true }
@@ -90,6 +91,7 @@ optimism = [
     "revm-interpreter/optimism",
     "revm-precompile/optimism",
     "dep:once_cell",
+    "dep:bls12_381",
 ]
 # Optimism default handler enabled Optimism handler register by default in EvmBuilder.
 optimism-default-handler = [

@@ -6,6 +6,198 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [17.0.0](https://github.com/refcell/revm/compare/revm-precompile-v16.0.0...revm-precompile-v17.0.0) - 2025-01-29
+
+### Added
+
+- *(eip7702)* apply latest EIP-7702 changes, backport from v52 (#1969)
+- integrate codspeed (#1935)
+- Restucturing Part7 Handler and Context rework (#1865)
+- restructuring Part6 transaction crate (#1814)
+- restructure Part2 database crate (#1784)
+- project restructuring Part1 (#1776)
+- introducing EvmWiring, a chain-specific configuration (#1672)
+- c-kzg bump, cleanup on kzgsetting (#1719)
+- use batch bn256 pair operation (#1643)
+- use `kzg-rs` for kzg point evaluation (#1558)
+- *(Precompiles)* Throw fatal error if c-kzg is disabled (#1589)
+- *(precompiles)* fatal error for precompiles (#1499)
+- add ecAdd to precompile bench (#1496)
+- *(optimism)* Add secp256r1 precompile for Fjord (#1436)
+- *(precompile)* Prague - EIP-2537 - BLS12-381 curve operations (#1389)
+- *(precompile)* add Prague hardfork specification (#1387)
+- add flag to force hashbrown usage (#1284)
+- EOF (Ethereum Object Format) (#1143)
+- make all precompiles public (#1213)
+- add benchmarks for ecpairing, kzg, ecrecover precompiles (#1211)
+- use Message::from_digest in secp256k1 ecrecover (#1199)
+- *(precompile)* add a bool to bytes32 helper function (#1170)
+- precompile with generic context (#1155)
+- Add boxed precompile trait (#1131)
+- bump c-kzg, add portable feature, make it default (#1106)
+- *(op)* Ecotone hardfork (#1009)
+- EvmBuilder and External Contexts (#888)
+- add asm-keccak feature (#972)
+- `Canyon` hardfork behind `optimism` feature flag (#871)
+- *(interpreter)* add more helper methods to memory (#794)
+- *(precompile)* use Aurora modexp lib. (#769)
+- derive more traits (#745)
+- Alloy primitives (#724)
+- Optimism execution changes (#682)
+- add "kzg" as a separate feature (#746)
+- implement EIP-4844 (#668)
+- alloy migration (#535)
+- Migrate `primitive_types::U256` to `ruint::Uint<256, 4>` (#239)
+- Introduce ByteCode format, Update Readme (#156)
+
+### Fixed
+
+- *(Inspector)* frame_end called multiple times (#2037)
+- *(eof)* fixture 2 tests (#1550)
+- check canonical Fp elements (#1434)
+- *(precompile)* ignore infinity points in G1 MSM (#1432)
+- *(precompile)* BLS G2 MSM (#1428)
+- *(precompile)* blst dangling pointers, cleanup (#1391)
+- *(precompile)* inherit Prague precompiles from Cancun (#1392)
+- update/enable bn128 tests (#1242)
+- use correct bn128 mul input length (#1238)
+- use correct rand package for thread_rng (#1233)
+- rename and pass optimism-default-handler to revm-primitives (#1098)
+- *(ci)* Workflow Touchups (#901)
+- *(eip4844)* Pass eth tests, additional conditions added. (#735)
+- pairing cost formula  (#659)
+- *(doc)* Inline documentation of re-exports (#560)
+- k256 compile error (#451)
+
+### Other
+
+- bump kzg.rs (#2002)
+- align crates versions (#1983)
+- blst reprice, remove g1/g2 mul (#1981)
+- integrate rust-secp256k1 (#1915)
+- fix comments and docs into more sensible (#1920)
+- Rename PRAGUE_EOF to OSAKA (#1903)
+- *(precompile)* use secp256k1 global context for ecrecover (#1843)
+- fix some typos (#1800)
+- Replace `PrecompileError` variant ([#1797](https://github.com/refcell/revm/pull/1797))
+- *(deps)* bump once_cell from 1.19.0 to 1.20.0 (#1773)
+- make clippy happy (#1755)
+- release (#1729)
+- bump kzg-rs version (#1734)
+- main changelog (#1730)
+- release (#1722)
+- bump `kzg-rs` version (#1726)
+- switch gas check order in blake2 precompile (#1718)
+- tag v41 revm v13.0.0 (#1692)
+- release (#1683)
+- Add OP-Granite hardfork, limiting bn256Pairing input size ([#1685](https://github.com/refcell/revm/pull/1685))
+- *(deps)* bump rstest from 0.21.0 to 0.22.0 (#1681)
+- *(deps)* bump blst from 0.3.12 to 0.3.13 (#1669)
+- *(clippy)* 1.80 rust clippy list paragraph ident (#1661)
+- use `is_zero` for `U256` and `B256` (#1638)
+- bump versions bcs of primitives (#1631)
+- release (#1620)
+- main CHANGELOG (#1592)
+- release (#1579)
+- bump precompile to v9.0.0 (#1590)
+- release (#1548)
+- avoid cloning precompiles (#1486)
+- *(precompiles)* Fix some nits in bls12_381 (#1495)
+- *(deps)* allow multiple versions of secp256k1 (#1490)
+- *(deps)* bump rstest from 0.19.0 to 0.21.0 (#1482)
+- *(deps)* bump blst from 0.3.11 to 0.3.12 (#1481)
+- add test for map_fp_to_g1 precompile (#1465)
+- add docs for BLS scalar input decoding (#1446)
+- release (#1261)
+- bump c-kzg to 1.0.2 (#1390)
+- refactor lints (#1386)
+- *(deps)* bump aurora-engine-modexp from 1.0.0 to 1.1.0 (#1339)
+- *(deps)* bump secp256k1 from 0.28.2 to 0.29.0 (#1260)
+- release (#1231)
+- remove unnecessary call to into_u256() for bn128 add (#1239)
+- Revert "feat: optional nonce check ([#1195](https://github.com/refcell/revm/pull/1195))" ([#1212](https://github.com/refcell/revm/pull/1212))
+- release (#1175)
+- expose functionality for custom EVMs (#1201)
+- c-kzg v1.0.0 (#1190)
+- fix some typos (#1189)
+- release (#1125)
+- release tag v30 revm v6.1.0 (#1100)
+- clippy cleanup (#1112)
+- release (#1082)
+- *(precompile)* use `Bytes` in precompile functions (#1085)
+- license date and revm docs (#1080)
+- release (#1067)
+- *(precompile)* don't allocate if padding is not needed (#1075)
+- *(precompile)* simplify bn128 precompile implementations (#1074)
+- *(precompile)* make use of padding utilities, simplify secp256k1 (#1073)
+- precompile bn128 copy (#1071)
+- *(revm)* Add helpers to Build Revm with Context (#1068)
+- tag v27, revm v4.0.0 release (#1061)
+- bump c-kzg and enable blst portable feature (#1059)
+- *(deps)* bump secp256k1 from 0.28.1 to 0.28.2 (#1038)
+- *(Cancun)* update Cancun precompiles docs (#1015)
+- *(log)* use alloy_primitives::Log (#975)
+- *(deps)* bump k256 from 0.13.2 to 0.13.3 (#959)
+- *(deps)* bump secp256k1 from 0.28.0 to 0.28.1 (#954)
+- *(deps)* bump once_cell from 1.18.0 to 1.19.0 (#908)
+- bump k256 and use normalize_s ([#870](https://github.com/refcell/revm/pull/870))
+- simplify use statements (#864)
+- *(precompiles)* Make PrecompileWithAddress field public, from impl (#857)
+- change addresses to iterator and add into_addresses (#855)
+- bump c-kzg to v0.4.0 (#849)
+- Refactor precompile list from Hash to vec (#823)
+- *(eip4844)* update kzg trusted setup (#822)
+- secp256k1 from 0.27 to 0.28 (#817)
+- for now support 1.69 rust compiler (#814)
+- document everything, dedup existing docs (#741)
+- bump v26 revm v3.5.0 ([#765](https://github.com/refcell/revm/pull/765))
+- tag v25, revm v3.4.0 (#755)
+- bump c-kzg to create lib (#758)
+- *(deps)* bump sha2 from 0.10.7 to 0.10.8 (#752)
+- modexp gas check ([#737](https://github.com/refcell/revm/pull/737))
+- Removed the last dependencies breaking no-std build. ([#669](https://github.com/refcell/revm/pull/669))
+- Revert "feat: alloy migration ([#535](https://github.com/refcell/revm/pull/535))" ([#616](https://github.com/refcell/revm/pull/616))
+- spell check (#615)
+- avoid unnecessary allocations (#581)
+- Bump v24, revm v3.3.0 ([#476](https://github.com/refcell/revm/pull/476))
+- Release v22, revm v3.1.1 ([#460](https://github.com/refcell/revm/pull/460))
+- *(deps)* bump sha3 from 0.10.6 to 0.10.7 (#454)
+- v21, revm v3.1.0 (#444)
+- bump all
+- *(deps)* bump secp256k1 from 0.26.0 to 0.27.0 (#429)
+- add primitive SpecId to precompile SpecId conversion (#408)
+- revm-precompiles to revm-precompile
+- Bump v20, changelog ([#350](https://github.com/refcell/revm/pull/350))
+- typos (#232)
+- Add support for old forks. ([#191](https://github.com/refcell/revm/pull/191))
+- revm bump 1.8. update libs. snailtracer rename ([#159](https://github.com/refcell/revm/pull/159))
+- typo fixes
+- fix readme typo
+- Big Refactor. Machine to Interpreter. refactor instructions. call/create struct ([#52](https://github.com/refcell/revm/pull/52))
+- readme. debuger update
+- Bump revm v0.3.0. README updated
+- readme
+- Add time elapsed for tests
+- readme updated
+- Include Basefee into cost calc. readme change
+- Initialize precompile accounts
+- Status update. Taking a break
+- Merkle calc. Tweaks and debugging for eip158
+- Replace aurora bn lib with parity's. All Bn128Add/Mul/Pair tests passes
+- TEMP
+- one tab removed
+- readme
+- README Example simplified
+- Gas calculation for Call/Create. Example Added
+- readme usage
+- README changes
+- Static gas cost added
+- Subroutine changelogs and reverts
+- Readme postulates
+- Spelling
+- Restructure project
+- First iteration. Machine is looking okay
+
 ## [11.0.1](https://github.com/bluealloy/revm/compare/revm-precompile-v11.0.0...revm-precompile-v11.0.1) - 2024-08-30
 
 ### Other

@@ -6,6 +6,727 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20.0.0](https://github.com/refcell/revm/compare/revm-v19.5.0...revm-v20.0.0) - 2025-02-13
+
+### Added
+
+- Split Inspector trait from EthHandler into standalone crate (#2075)
+- integrate alloy-eips (#2078)
+- Evm structure (Cached Instructions and Precompiles) (#2049)
+- Context execution (#2013)
+- EthHandler trait (#2001)
+- *(EIP-7623)* adjuct floor gas check order (main) (#1991)
+- *(EIP-7623)* Increase calldata cost. backport from rel/v51 (#1965)
+- simplify Transaction trait (#1959)
+- expose precompile address in Journal, DB::Error: StdError (#1956)
+- integrate codspeed (#1935)
+- Make Ctx journal generic (#1933)
+- Restucturing Part7 Handler and Context rework (#1865)
+- restructuring Part6 transaction crate (#1814)
+- push NonceChange to Journal in deduct_caller (#1804)
+- Merge validation/analyzis with Bytecode (#1793)
+- Restructuring Part3 inspector crate (#1788)
+- restructure Part2 database crate (#1784)
+- project restructuring Part1 (#1776)
+- to_plain_state (#1778)
+- *(example)* deploy bytecode from scratch (#1767)
+- introducing EvmWiring, a chain-specific configuration (#1672)
+- *(eip7702)* Impl newest version of EIP  (#1695)
+- check for typos in CI (#1686)
+- *(EOF)* EOF Validation add code type and sub container tracker (#1648)
+- pass interpreter into Inspector::log (#1610)
+- *(EOF)* Bytecode::new_raw supports EOF, new_raw_checked added (#1607)
+- use `kzg-rs` for kzg point evaluation (#1558)
+- add bytecode_address from CallInputs to Contract during construction. (#1568)
+- *(Prague)* Add EIP-7702 (#1565)
+- *(EOF)* disallow ExtDelegateCall to legacy bytecode (#1572)
+- *(EOF)* Add target address expansion checks (#1570)
+- *(revm)* derive serde for `BundleState` (#1539)
+- bump alloy, re-enable alloydb (#1533)
+- mutable access for all fields in BundleBuilder (#1524)
+- *(EOF)* Put EOF bytecode behind an Arc (#1517)
+- *(EOF)* EXTCODECOPY,EXTCODESIZE,EXTCODEHASH eof support (#1504)
+- add helpers for working with instruction tables (#1493)
+- *(precompiles)* fatal error for precompiles (#1499)
+- Persist reverted account and storage slot lookups in `JournaledState` (#1437)
+- *(EOF)* EIP-7698 eof creation transaction (#1467)
+- *(EOF)* Add EOF to inspector handle register (#1469)
+- *(optimism)* Implement new L1 cost function for Fjord (#1420)
+- *(optimism)* Add secp256r1 precompile for Fjord (#1436)
+- *(revm)* revert EIP-2935 BLOCKHASH opcode changes (#1450)
+- load account should return db error (#1447)
+- *(EOF)* remove TXCREATE (#1415)
+- *(precompile)* Prague - EIP-2537 - BLS12-381 curve operations (#1389)
+- add a hook to execute individual frames (#1369)
+- *(Handler)* Add ClearHandle (#1368)
+- Add uniswap V2 WETH-USDC swap example (#1353)
+- *(interpreter)* add helpers for spending all gas (#1360)
+- add helper methods to CallInputs (#1345)
+- *(revm)* make `FrameOrResult` serializable (#1282)
+- add flag to force hashbrown usage (#1284)
+- EOF (Ethereum Object Format) (#1143)
+- *(`db`)* Introduce `alloydb` (#1257)
+- *(interpreter)* remove SPEC generic from gas calculation functions (#1243)
+- *(interpreter)* test Host object-safety, allow `dyn Host` in instructions (#1245)
+- [**breaking**] TracerEip3155 optionally traces memory (#1234)
+- add convert_boxed and insert_boxed for InstructionTable (#1194)
+- optional nonce check (#1195)
+- Restrict ContextPrecompiles only to EvmContext (#1174)
+- add insert method on instruction table (#1167)
+- precompile with generic context (#1155)
+- use `impl` instead of `dyn` in `GetInspector` (#1157)
+- add more JournaledState methods to EvmContext (#1158)
+- add example for using a database by reference (#1150)
+- Add boxed precompile trait (#1131)
+- add with_handler method to EvmBuilder (#1124)
+- bump c-kzg, add portable feature, make it default (#1106)
+- split off serde_json dependency to its own feature (#1104)
+- improve OriginalValuesKnown docs (#1083)
+- *(handler)* Change spec id on &mut (#1055)
+- *(Handler)* add push and pop of hanler registers (#1053)
+- tweeks for v4.0 revm release (#1048)
+- *(op)* Ecotone hardfork (#1009)
+- *(inspector)* Share call/create inputs in Inspector call_end/create_end (#1003)
+- Convert optimism panic into graceful error (#982)
+- EvmBuilder and External Contexts (#888)
+- add asm-keccak feature (#972)
+- *(ethersdb)* propagate errors instead of panicking in basic_ref (#935)
+- *(revm)* implement prepend_state for BundleState (#907)
+- add serde derives for `CacheDB` under "serde" flag (#911)
+- *(examples)* generate block traces (#895)
+- *(revm)* Evm Context Tests and test-utils Feature (#903)
+- `Canyon` hardfork behind `optimism` feature flag (#871)
+- Loop call stack (#851)
+- transition account balance delta (#843)
+- *(cfg)* optionally disable beneficiary reward (#834)
+- add more `auto_impl`s to revm traits (#799)
+- *(interpreter)* add more helper methods to memory (#794)
+- derive more traits (#745)
+- add methods to `CreateInput` for calculating created address (#793)
+- *(revm)* implement DatabaseRef trait for EthersDB (#774)
+- Alloy primitives (#724)
+- Optimism execution changes (#682)
+- add "kzg" as a separate feature (#746)
+- implement EIP-4844 (#668)
+- *(state)* remove state sorting, no_std ci,remove rayon (#717)
+- return wiped inside storage changeset (#711)
+- *(state)* Nits, builder option and OriginalValueKnown flags (#699)
+- *(StateBuilder)* switch builder option from without_bundle to with_bundle (#688)
+- *(state)* take N reverts from BundleState, struct refactor (#681)
+- add BundleState::revert_latest (#661)
+- *(state)* add a flag allowing transition merge without reverts (#657)
+- *(state)* Make Bundle extend wipe aware (#655)
+- *(state)* ability to disable reverts collection in bundle state (#654)
+- *(`interpreter`)* add hash to bytecode (#628)
+- Optional coinbase tip (#625)
+- *(state)* Use preloaded bundle inside state (#622)
+- *(state)* Block hash cache and overrides (#621)
+- alloy migration (#535)
+- State with account status (#499)
+- EIP-1153 Transient storage opcodes (#546)
+- separate initial checks (#486)
+- Create account checkpoint (#483)
+- Introduce account status as bitflag inside JournalState (#477)
+- Add all internals results to Halt (#413)
+- add contract+target to selfdestruct hook (#410)
+- Add check for chainID (#393)
+- add EVM::with_env (#385)
+- json opcode traces EIP-3155 (#356)
+- *(Shanghai)* All EIPs: push0, warm coinbase, limit/measure initcode (#376)
+- Different OutOfGas Error types (#354)
+- revm-interpreter created (#320)
+- allow disabling of balance checks (#297)
+- Export CustomPrinter insector from revm (#300)
+- substitute web3db to ethersdb (#293)
+- *(revm)* Return `bytes` in Create calls (#289)
+- *(interpreter)* Unify instruction fn signature (#283)
+- *(revm)* Add prevrandao field to EnvBlock (#271)
+- *(refactor)* make keccak in one place. (#247)
+- Migrate `primitive_types::U256` to `ruint::Uint<256, 4>` (#239)
+- allow block gas limit to be toggled off (#238)
+- allow eip3607 to be toggled off (#237)
+- *(revm, revme)* gas inspector (#222)
+- add Memory::shrink_to_fit (#215)
+- expose hash on `BytecodeLocked` (#189)
+- *(revm)* more default trait implementations (#181)
+- Introduce ByteCode format, Update Readme (#156)
+- add Subroutine debug clone derive (#128)
+- add ord derives to specid (#127)
+- add getters for cachedb (#119)
+- add serde support to model types (#91)
+- add some PartialEq derives (#90)
+- `Inspector::log` (#85)
+- mutable call inputs
+- call insp end functions on early return
+- cache block hashes (#71)
+- implement `DatabaseRef` for `CacheDB`
+
+### Fixed
+
+- make macro crate-agnostic (#1802)
+- *(inspector)* always call selfdestruct if entry is made (#1746)
+- *(eip7702)* Add tests and fix some bugs (#1605)
+- correctly calculate eofcreate address (#1619)
+- allow non-static lifetime in HandleRegisterBox (#1608)
+- *(EOF)* Use cfg code size limit for eofcreate (#1606)
+- *(eof)* fixture 2 tests (#1550)
+- *(eof)* output gas for eofcreate (#1540)
+- *(revm)* remove storage reset that clears is_cold flag (#1518)
+- *(op)* Remove `U256::from(<float>)` (#1498)
+- *(EOF)* panic on empty input range, and continue exec after eofcreate (#1477)
+- *(Interpreter)* wrong block number used (#1458)
+- blockchash for devnet-0  (#1427)
+- *(eip2935)* Preload blockchash storage address (#1395)
+- return the correct error in resize_memory (#1359)
+- *(TracerEip3155)* clear Inspector data after transaction. (#1230)
+- *(GasInspector)* calculate correct remaining gas after call return (#1236)
+- fix eip3155 summary gas_used bug and add fork name ([#1216](https://github.com/refcell/revm/pull/1216))
+- *(revme)* revme error output and remove double summary (#1169)
+- gas cost calculation (#1166)
+- reset tstorage on finalize (#1168)
+- make `feature = "optional_gas_refund"` work (#1134)
+- replace tuple in sstore return with struct (#1115)
+- fix EthersDB deadlock ([#1089](https://github.com/refcell/revm/pull/1089))
+- Handle fatal db error on load_account (#1111)
+- rename and pass optimism-default-handler to revm-primitives (#1098)
+- modify cfg spec_id (#1095) (#1096)
+- optimism compilation (#1091)
+- properly set context env (#1070)
+- typo on internal append_handle_register methods (#1069)
+- *(op)* skip validation on deposit tx (#1065)
+- fix previous commit ([#1044](https://github.com/refcell/revm/pull/1044))
+- *(State)* Preserve original values on delete revert (#1010)
+- optimism gas refunds (#989)
+- dont calculate initcode keccak on CREATE (#969)
+- *(ci)* Workflow Touchups (#901)
+- safer stack (#879)
+- *(op)* Base Goerli `op-reth` sync patches (#824)
+- fix typos in revm crate ([#821](https://github.com/refcell/revm/pull/821))
+- Optimism execution (#789)
+- rename `DatabaseRef` trait functions to `*_ref` (#795)
+- use u128 for calc data fee result (#757)
+- *(eip4844)* Pass eth tests, additional conditions added. (#735)
+- use CANCUN precompile id for CANCUN SpecId (#733)
+- *(state)* Extend now properly transfers wiped storage (#675)
+- *(state)* retain destroyed account status on bundle extend (#667)
+- *(state)* Regresion, remove present info on selfdestruct (#664)
+- *(state)* state transition regression (#662)
+- *(state)* drop storage only for DestroyedChanged (#651)
+- fix revert from DestroyedChanged to DestroyedAgain ([#648](https://github.com/refcell/revm/pull/648))
+- *(state)* check if storage revert is empty (#643)
+- *(state)* return RevertToSlot struct with more info (#636)
+- *(inspector)* call call_end/create_end when inspector shortcircuits calls (#609)
+- Load caller in safe way in finalization fn (#604)
+- *(transient_storage)* set previous value in journal (#585)
+- AccessList with two same addresses (#578)
+- *(revm)* EIP-3155 tracer tx output without debug artefact (#552)
+- *(revm)* extra return in EIP3155 inspector (#563)
+- *(revm)* include CREATE/CREATE2 in EIP3155 inspector (#562)
+- *(doc)* Inline documentation of re-exports (#560)
+- fix comment ([#529](https://github.com/refcell/revm/pull/529))
+- typo in eip-3155 output (#497)
+- revert of selfdestruct with same target address (#475)
+- compile errors for features (#467)
+- touched account on creation (#463)
+- k256 compile error (#451)
+- *(db)* preserve existing account state (#414)
+- call create_end for all code paths (#362)
+- disable balance check (#342)
+- feature flags (#330)
+- broken feature flags (#319)
+- feature flag compiler errors (#256)
+- fix web3db sanity check ([#245](https://github.com/refcell/revm/pull/245))
+- return out of gas code for precompiled contracts (#234)
+- make DatabaseRef::basic consistent with Database (#201)
+- Use `saturating_add` instead of `checked_add` in `finalize` (#184)
+- *(revm)* Fix balance overflow in `finalize` (#182)
+- set gas_block to empty bytecode (#172)
+- BLOCKHASH should return 0 if number not in last 256 blocks (#112)
+- impose a memory limit (#86)
+- interpreter gas should immutably borrow self
+- return spent gas with refunds accounted for
+- various inspector fixes (#69)
+- call inspector `step` and `step_end`
+- export missing machine structs
+- export `Filth`
+- make `*_ref` functions take `&self`
+- *(clippy)* fix some clippy lints
+
+### Other
+
+- backport op l1 fetch perf (#2076)
+- API cleanup (#2067)
+- Add helpers with_inspector with_precompile (#2063)
+- Bump licence year to 2025 (#2058)
+- bump alloy versions to match latest (#2007)
+- align crates versions (#1983)
+- Make inspector use generics, rm associated types (#1934)
+- fix comments and docs into more sensible (#1920)
+- EVM transact, make output generic for POSTEXEC (#1931)
+- Move CfgEnv from context-interface to context crate (#1910)
+- bumps select alloy crates to 0.6 (#1854)
+- some no_std cleanup (#1834)
+- bump alloy to 0.4.2 (#1817)
+- *(primitives)* replace HashMap re-exports with alloy_primitives::map (#1805)
+- *(deps)* bump anyhow from 1.0.88 to 1.0.89 (#1772)
+- simplify SuccessOrHalt trait bound (#1768)
+- *(deps)* bump alloy-sol-types from 0.8.0 to 0.8.2 (#1762)
+- *(deps)* bump anyhow from 1.0.86 to 1.0.87 (#1760)
+- make clippy happy (#1755)
+- Test l1 gas used fjord ([#1749](https://github.com/refcell/revm/pull/1749))
+- Add test for `revm::optimism::L1BlockInfo::calculate_tx_l1_cost_fjord` ([#1743](https://github.com/refcell/revm/pull/1743))
+- *(deps)* bump tokio from 1.39.2 to 1.40.0 (#1739)
+- release (#1729)
+- main changelog (#1730)
+- release (#1722)
+- *(deps)* bump alloy and primitives (#1725)
+- cast block number to u64 and not usize (#1727)
+- clean up some journalstate docs (#1712)
+- update some docs related to state (#1711)
+- tag v41 revm v13.0.0 (#1692)
+- release (#1683)
+- Add OP-Granite hardfork, limiting bn256Pairing input size ([#1685](https://github.com/refcell/revm/pull/1685))
+- *(deps)* bump rstest from 0.21.0 to 0.22.0 (#1681)
+- *(deps)* bump tokio from 1.38.1 to 1.39.2 (#1668)
+- *(clippy)* 1.80 rust clippy list paragraph ident (#1661)
+- avoid cloning original_bytes (#1646)
+- use `is_zero` for `U256` and `B256` (#1638)
+- fix some typos & remove useless Arc::clone (#1621)
+- *(eof)* simplify magic checks (#1633)
+- bump versions bcs of primitives (#1631)
+- bump main changelog (#1630)
+- *(EOF)* Use Bytecode::new_legacy (#1628)
+- release (#1620)
+- bump alloy deps (#1623)
+- *(deps)* bump alloy-sol-types from 0.7.6 to 0.7.7 (#1614)
+- group optimism invalid txn errors (#1604)
+- load_account -> warm_preloaded_addresses (#1584)
+- Refactor code, and check if precompile for create collision (#1600)
+- *(revm)* defer bytecode load (#1588)
+- Rename gas_price to gas_limit for precompile args (#1593)
+- release (#1579)
+- bump precompile to v9.0.0 (#1590)
+- Use HandleOrRuntime to allow alloydb/ethersdb to hold a custom runtime ([#1576](https://github.com/refcell/revm/pull/1576))
+- store tokio::runtime::Handle in ethers/alloyDB (#1557)
+- use const blocks (#1522)
+- fix compile for alloydb (#1559)
+- replace AccessList with alloy version (#1552)
+- replace U256 with u64 in BLOCKHASH (#1505)
+- release (#1548)
+- Add CI build target for no-std + optimism, use matrix builds (#1551)
+- replace TransactTo with TxKind (#1542)
+- avoid cloning precompiles (#1486)
+- add setters to `BundleBuilder` with `&mut self` (#1527)
+- pluralize EOFCreateInput (#1523)
+- Removed .clone() in ExecutionHandler::call, and reusing output buffer in Interpreter ([#1512](https://github.com/refcell/revm/pull/1512))
+- remove old deprecated items (#1489)
+- *(deps)* bump rstest from 0.19.0 to 0.21.0 (#1482)
+- *(deps)* bump tokio from 1.37.0 to 1.38.0 (#1480)
+- *(primitives)* rename State/Storage to EvmState/EvmStorage (#1459)
+- remove 'checked' bytecode bench causing benchmarks to crash due to name ([#1461](https://github.com/refcell/revm/pull/1461))
+- cargo update (#1451)
+- cleanup host blockhash fn (#1430)
+- Revert "Revert "feat: implement EIP-2935 ([#1354](https://github.com/refcell/revm/pull/1354))" ([#1424](https://github.com/refcell/revm/pull/1424))" ([#1426](https://github.com/refcell/revm/pull/1426))
+- Revert "feat: implement EIP-2935 ([#1354](https://github.com/refcell/revm/pull/1354))" ([#1424](https://github.com/refcell/revm/pull/1424))
+- *(deps)* bump anyhow from 1.0.82 to 1.0.83 (#1404)
+- remove alloydb example as the crate is not published (#1398)
+- release (#1261)
+- refactor lints (#1386)
+- bump alloy & specify dep rev ([#1380](https://github.com/refcell/revm/pull/1380))
+- *(interpreter)* branch less in as_usize_or_fail (#1374)
+- *(ci)* bump action/deploy (#1372)
+- shrink OpCodeInfo and add more methods (#1307)
+- *(deps)* bump anyhow from 1.0.81 to 1.0.82 (#1293)
+- fix some warnings (#1305)
+- *(interpreter)* use `pop_top!` where possible (#1267)
+- add and use EvmContext::take_error (#1264)
+- release (#1231)
+- use uint macro & fix various small things (#1253)
+- *(deps)* bump tokio from 1.36.0 to 1.37.0 (#1244)
+- *(interpreter)* unbox contract field (#1228)
+- *(primitives)* kzg intro (#1209)
+- *(interpreter)* keep track of remaining gas rather than spent (#1221)
+- Improve `EthersDB` ([#1208](https://github.com/refcell/revm/pull/1208))
+- Revert "feat: optional nonce check ([#1195](https://github.com/refcell/revm/pull/1195))" ([#1212](https://github.com/refcell/revm/pull/1212))
+- release (#1175)
+- Change unwrap to ? to propagate errors ([#1207](https://github.com/refcell/revm/pull/1207))
+- fix wonky test (#1197)
+- clippy (#1196)
+- *(deps)* bump anyhow from 1.0.80 to 1.0.81 (#1187)
+- fix some typos (#1189)
+- Update post_execution.rs ([#1180](https://github.com/refcell/revm/pull/1180))
+- tag v32 revm v7.1.0 (#1176)
+- release (#1125)
+- *(deps)* bump ethers-contract from 2.0.13 to 2.0.14 (#1161)
+- *(interpreter)* evaluate instruction table constructor at compile time (#1140)
+- remove clone for context in handler_register.rs (#1138)
+- Check runtime dynamically ([#1135](https://github.com/refcell/revm/pull/1135))
+- *(deps)* bump auto_impl from 1.1.2 to 1.2.0 (#1132)
+- Add `db` and `db_mut` to evm ([#1133](https://github.com/refcell/revm/pull/1133))
+- add ToString for no_std add exports some types in no_std (#1128)
+- Add `clone` method to `ContextWithHandlerCfg` ([#1127](https://github.com/refcell/revm/pull/1127))
+- remove unused EvmInstructionTables type alias (#1123)
+- release tag v30 revm v6.1.0 (#1100)
+- Ensure `L1Block` is in the cache ([#1121](https://github.com/refcell/revm/pull/1121))
+- Fix feature name for generate_block_traces example ([#1120](https://github.com/refcell/revm/pull/1120))
+- *(refactor)* Propagate fatal error (#1116)
+- Revert "fix EthersDB deadlock ([#1089](https://github.com/refcell/revm/pull/1089))" ([#1118](https://github.com/refcell/revm/pull/1118))
+- Remove DatabaseRef bound on CacheDB ([#1113](https://github.com/refcell/revm/pull/1113))
+- clippy cleanup (#1112)
+- *(deps)* bump anyhow from 1.0.79 to 1.0.80 (#1108)
+- improve EIP-3155 implementation (#1105)
+- release (#1082)
+- *(state)* avoid cloning full account (#1097)
+- *(precompile)* use `Bytes` in precompile functions (#1085)
+- Add memory offset ([#1032](https://github.com/refcell/revm/pull/1032))
+- license date and revm docs (#1080)
+- release (#1067)
+- *(precompile)* make use of padding utilities, simplify secp256k1 (#1073)
+- *(revm)* Add helpers to Build Revm with Context (#1068)
+- *(revme)* statetests new format and return error (#1066)
+- README path
+- tag v27, revm v4.0.0 release (#1061)
+- bump c-kzg and enable blst portable feature (#1059)
+- spelling on last commit (#1058)
+- helper functions around Env (#1057)
+- *(deps)* bump tokio from 1.35.1 to 1.36.0 (#1052)
+- *(EvmBuilder)* rename builder functions to HandlerCfg (#1050)
+- *(deps)* bump ethers-contract from 2.0.11 to 2.0.13 (#1034)
+- *(std)* Add std HashMap,HashSet (#1041)
+- group handlers (#1030)
+- *(Inspector)* add inspector depth test (#1028)
+- *(op)* Move op l1 block load to op handler (#1026)
+- *(clippy)* nightly clippy (#1025)
+- *(Execution)* Granular handles create/call,call_return,insert_call_outcome (#1024)
+- *(Inspector)* Add return_memory_offset to Inspector::call (#1006)
+- update call end docs (#1000)
+- add getter for specId (#998)
+- Remove preserve_order in serde_json ([#997](https://github.com/refcell/revm/pull/997))
+- update create docs (#999)
+- *(revme)* EmptyDb Blockhash string, json-outcome flag, set prevrandao in statetest (#994)
+- *(Inspector)* add CallOutcome to call/call_end (#985)
+- set deduct_caller in optimism handler ([#988](https://github.com/refcell/revm/pull/988))
+- fix serde std flags for no-std build (#987)
+- *(Inspector)* Add CreateOutcome in create/create_end return (#980)
+- *(log)* use alloy_primitives::Log (#975)
+- *(EvmBuilder)* Remove unnecessary BuilderStage trait (#979)
+- enhance readability (#968)
+- *(interpreter)* refactor sstore_cost (#974)
+- *(interpreter)* improve enum naming (#962)
+- *(deps)* bump anyhow from 1.0.77 to 1.0.79 (#950)
+- relax Bytes requirement and use slice instead (#937)
+- *(deps)* bump futures from 0.3.29 to 0.3.30 (#927)
+- *(deps)* bump anyhow from 1.0.75 to 1.0.76 (#921)
+- *(deps)* bump tokio from 1.34.0 to 1.35.0 (#909)
+- *(revm)* leverage StorageSlot methods, where appropriate (#899)
+- relax state generic (#881)
+- clippy (#877)
+- *(deps)* bump ethers-contract from 2.0.10 to 2.0.11 (#867)
+- bump k256 and use normalize_s ([#870](https://github.com/refcell/revm/pull/870))
+- simplify use statements (#864)
+- Fix error message for LackOfFundForMaxFee ([#858](https://github.com/refcell/revm/pull/858))
+- Fix rustdoc warnings (#859)
+- *(deps)* bump tokio from 1.33.0 to 1.34.0 (#856)
+- change addresses to iterator and add into_addresses (#855)
+- use keccak256 for blockhash (#854)
+- review safety comments (#811)
+- *(deps)* bump futures from 0.3.28 to 0.3.29 (#839)
+- *(state)* consistent selfdestruct status transition (#847)
+- *(state)* move account status transitions to `AccountStatus` (#844)
+- *(state)* simplify control flow in `CacheState::apply_evm_state` (#842)
+- Refactor precompile list from Hash to vec (#823)
+- *(state)* make `State::apply_transition` pub (#832)
+- *(state)* make bundle state non-optional (#828)
+- Refactor evm data to its file (#815)
+- for now support 1.69 rust compiler (#814)
+- refactor main return to handle (#808)
+- *(SharedMemory)* small refactor; tests (#806)
+- use `array::from_fn` in `make_instruction_table` (#809)
+- remove `step` and `step_end` return result (#804)
+- Instruction table ([#759](https://github.com/refcell/revm/pull/759))
+- getter for  field of ([#792](https://github.com/refcell/revm/pull/792))
+- Shared memory between calls ([#673](https://github.com/refcell/revm/pull/673))
+- Fix typos (#790)
+- *(deps)* bump tokio from 1.32.0 to 1.33.0 (#785)
+- Use upstream create and create2 implementations ([#775](https://github.com/refcell/revm/pull/775))
+- reorder JournalState impl (#772)
+- document everything, dedup existing docs (#741)
+- bump v26 revm v3.5.0 ([#765](https://github.com/refcell/revm/pull/765))
+- document non-zero amounts in State::increment_balances (#760)
+- tag v25, revm v3.4.0 (#755)
+- Improve wording and fix typos ([#749](https://github.com/refcell/revm/pull/749))
+- say "warm" instead of "hot" (#754)
+- SELFDESTRUCT only in same transaction (#719)
+- error type for block header (#731)
+- refactor interpreter internals and cleanup (#582)
+- make BundleBuilder publicly available ([#729](https://github.com/refcell/revm/pull/729))
+- *(perf)* only recalc code hash if its the default (#716)
+- add warning on panic conditions in take_bundle (#715)
+- Never inline the prepare functions ([#712](https://github.com/refcell/revm/pull/712))
+- *(deps)* bump bytes from 1.4.0 to 1.5.0 (#707)
+- *(deps)* bump ethers-contract from 2.0.9 to 2.0.10 (#705)
+- *(state)* do not insert empty reverts in state (#702)
+- implement `Default` for other databases (#691)
+- make `impl Default for StateBuilder` generic (#690)
+- bundle size hint ([#670](https://github.com/refcell/revm/pull/670))
+- deprecate `RefDBWrapper` (#696)
+- expose StateDBBox (#694)
+- *(state)* Make Database more generic. (#687)
+- nits and renamings (#684)
+- apply builder pattern for BundleState initialization ([#649](https://github.com/refcell/revm/pull/649))
+- impl Eq, PartialEq for TransitionState (#677)
+- Removed the last dependencies breaking no-std build. ([#669](https://github.com/refcell/revm/pull/669))
+- *(state)* bundle retention (#666)
+- *(deps)* bump ethers-contract from 2.0.8 to 2.0.9 (#640)
+- filter out empty bytecode from bundle (#656)
+- *(state)* bundle state split (#646)
+- add value parameter to Inspector::selfdestruct ([#645](https://github.com/refcell/revm/pull/645))
+- Split transaction pre verification to separate function (#573)
+- *(state)* bundle selfdestructs (#627)
+- misc improvements (#633)
+- bundle state (#637)
+- *(state)* remove redundunt info revert on destruct (#635)
+- book workflow ([#537](https://github.com/refcell/revm/pull/537))
+- *(state)* bundle reverts collapse (#626)
+- Revert "feat: alloy migration ([#535](https://github.com/refcell/revm/pull/535))" ([#616](https://github.com/refcell/revm/pull/616))
+- *(state)* account & storage revert value preservation (#614)
+- spell check (#615)
+- get or insert bundle state (#613)
+- *(deps)* bump anyhow from 1.0.74 to 1.0.75 (#606)
+- *(deps)* bump tokio from 1.31.0 to 1.32.0 (#607)
+- export some `unreachable_pub` items (#598)
+- *(deps)* bump anyhow from 1.0.72 to 1.0.74 (#602)
+- fix test build, use new types (#605)
+- Revert test, not change storage check , renaming of original slot value (#601)
+- `TransitionState::with_capacity` -> `TransitionState::single` (#600)
+- pre-allocate inner bundle state (#599)
+- avoid unnecessary allocations (#581)
+- *(deps)* bump tokio from 1.29.1 to 1.31.0 (#595)
+- move precompiles to EVMData for inspectors (#588)
+- rewrite revm-test as a criterion bench (#579)
+- clippy and fmt (#568)
+- optimize stack usage for recursive `call` and `create` programs ([#522](https://github.com/refcell/revm/pull/522))
+- consume all gas on invalid opcode ([#500](https://github.com/refcell/revm/pull/500))
+- *(deps)* bump auto_impl from 1.0.1 to 1.1.0 (#478)
+- fix comment typo (#517)
+- add some CacheDB docs (#484)
+- refactor interpreter run and remove static flag (#481)
+- Bundle inspector crate/call calls (#480)
+- Bump v24, revm v3.3.0 ([#476](https://github.com/refcell/revm/pull/476))
+- *(deps)* bump tokio from 1.27.0 to 1.28.0 (#470)
+- *(deps)* bump anyhow from 1.0.70 to 1.0.71 (#471)
+- add example to revm crate ([#468](https://github.com/refcell/revm/pull/468))
+- Release v23, revm v3.2.0 ([#464](https://github.com/refcell/revm/pull/464))
+- Release v22, revm v3.1.1 ([#460](https://github.com/refcell/revm/pull/460))
+- typos (#448)
+- v21, revm v3.1.0 (#444)
+- bump all
+- ethers to v2.0
+- Improve EthersDB::new ([#440](https://github.com/refcell/revm/pull/440))
+- add feature for ignoring base fee check ([#436](https://github.com/refcell/revm/pull/436))
+- *(deps)* bump futures from 0.3.26 to 0.3.27 (#416)
+- enabled primtive default feature in precompile (#409)
+- fix typo StorageChange (#403)
+- *(deps)* bump tokio from 1.25.0 to 1.26.0 (#395)
+- remove gas blocks (#391)
+- impl NonceTooHigh/ NonceTooLow checks ([#383](https://github.com/refcell/revm/pull/383))
+- fix compilation if serde not enabled (#381)
+- add no_std to primitives ([#366](https://github.com/refcell/revm/pull/366))
+- *(deps)* bump tokio from 1.24.2 to 1.25.0 (#352)
+- *(deps)* bump futures from 0.3.25 to 0.3.26 (#353)
+- rename Then to Than (#368)
+- add error details to InvalidTransaction::LackOfFundForGasLimit (#364)
+- Use gas price in place of effective gas price for initial balance check ([#359](https://github.com/refcell/revm/pull/359))
+- revm-precompiles to revm-precompile
+- Bump v20, changelog ([#350](https://github.com/refcell/revm/pull/350))
+- Cleanup imports ([#348](https://github.com/refcell/revm/pull/348))
+- add logs & return value to revert (#343)
+- includes to libs (#338)
+- Creating revm-primitives, revm better errors and db components  ([#334](https://github.com/refcell/revm/pull/334))
+- mark `with-serde` feature as deprecated (#328)
+- add Eq to AccountState (#326)
+- make load_account pub ([#325](https://github.com/refcell/revm/pull/325))
+- Cleanup, move hot fields toggether in Interpreter ([#321](https://github.com/refcell/revm/pull/321))
+- *(deps)* bump tokio from 1.22.0 to 1.23.0 (#284)
+- remove --all-features from tests bcs of gas calc gets disabled ([#291](https://github.com/refcell/revm/pull/291))
+- Integer overflow while calculating the remaining gas in GasInspector (#287)
+- native bits ([#278](https://github.com/refcell/revm/pull/278))
+- *(release)* Bump revm and precompiles versions
+- Bump primitive_types. Add statetest spec
+- Bump revm to v2.3.0
+- disable gas refunds with env flag ([#267](https://github.com/refcell/revm/pull/267))
+- Export StorageSlot ([#265](https://github.com/refcell/revm/pull/265))
+- Remove unused parking_lot dependency ([#244](https://github.com/refcell/revm/pull/244))
+- v17 release notes, revm v2.2.0 (#262)
+- *(eth/test)* Added OEF spec for tests. Skip HighGasPrice (#261)
+- if returndatacopy is len 0 return after initial cost (#259)
+- Borrow self and add derive traits for OpCode ([#231](https://github.com/refcell/revm/pull/231))
+- Bump revm v2.1.0 ([#224](https://github.com/refcell/revm/pull/224))
+- expose original value on storageslot (#216)
+- revm bump v2.0.0, precompile bump v1.1.1 ([#212](https://github.com/refcell/revm/pull/212))
+- Optimize gas calculation U256 to u64 ([#213](https://github.com/refcell/revm/pull/213))
+- current_opcode fn and rename program_counter to instruction_pointer ([#211](https://github.com/refcell/revm/pull/211))
+- Cfg choose create analysis, option on bytecode size limit ([#210](https://github.com/refcell/revm/pull/210))
+- export create address calls (#209)
+- Cargo sort. Bump lib versions ([#208](https://github.com/refcell/revm/pull/208))
+- *(deps)* bump futures from 0.3.23 to 0.3.24 (#194)
+- use Infallible for memory db's error type ([#196](https://github.com/refcell/revm/pull/196))
+- reexport revm_precompiles as precompiles ([#197](https://github.com/refcell/revm/pull/197))
+- Cache precompile hashmaps ([#192](https://github.com/refcell/revm/pull/192))
+- Add support for old forks. ([#191](https://github.com/refcell/revm/pull/191))
+- export JournaledState (#190)
+- Revert "refactor(revm): use u64 for gas refund counter ([#180](https://github.com/refcell/revm/pull/180))" ([#187](https://github.com/refcell/revm/pull/187))
+- *(revm)* use u64 for gas refund counter (#180)
+- *(precompiles)* Vec -> BTreeMap (#177)
+- *(deps)* bump futures from 0.3.21 to 0.3.23 (#173)
+- Handle HighNonce tests ([#176](https://github.com/refcell/revm/pull/176))
+- JournaledState ([#175](https://github.com/refcell/revm/pull/175))
+- Update account storage methods in CacheDB (#171)
+- Return `ExecutionResult`, which includes `gas_refunded` (#169)
+- Optimize calldataload. Some cleanup ([#168](https://github.com/refcell/revm/pull/168))
+- bump revm v1.9.0
+- Bytecode hash, remove override_spec, ([#165](https://github.com/refcell/revm/pull/165))
+- revm bump 1.8. update libs. snailtracer rename ([#159](https://github.com/refcell/revm/pull/159))
+- bump revm_precompiles to v1.1.0
+- bump revm to v1.7.0
+- Byzantine to Byzantium ([#146](https://github.com/refcell/revm/pull/146))
+- Make CacheDB fields pub ([#145](https://github.com/refcell/revm/pull/145))
+- Update README
+- bump revm 1.6.0, changelogs
+- Introduce account Touched/Cleared/None state in CacheDB ([#140](https://github.com/refcell/revm/pull/140))
+- Return specific `Return` statuses in `CALL`s ([#136](https://github.com/refcell/revm/pull/136))
+- don't delete account and storage entries on commit ([#126](https://github.com/refcell/revm/pull/126))
+- revm bump v1.5.0. Release notes
+- enable EIP2200 in Istanbul ([#125](https://github.com/refcell/revm/pull/125))
+- Consensus error with gas block for SSTORE stipend check ([#124](https://github.com/refcell/revm/pull/124))
+- v9 release notes
+- export evm_inner (#122)
+- *(deps)* bump auto_impl from 0.5.0 to 1.0.1 (#118)
+- [revm] bump to v1.4.0
+- *(clippy)* make clippy happy (#120)
+- rm empty line
+- changelog for v7 tag
+- empty keccak constant and remove access_list.clone ([#111](https://github.com/refcell/revm/pull/111))
+- typo fixes
+- [revm] is_static for Inspector initialize_interp
+- v6 changelog, bump versions
+- add missing derives
+- Rework analysis ([#89](https://github.com/refcell/revm/pull/89))
+- Update AccountInfo#code documentation ([#94](https://github.com/refcell/revm/pull/94))
+- Various fixes ([#93](https://github.com/refcell/revm/pull/93))
+- remove untable fmt
+- nit
+- [revm] optimize is_push check
+- turn off default features for zkp-u256 (#68)
+- Bump futures from 0.3.17 to 0.3.21 ([#64](https://github.com/refcell/revm/pull/64))
+- bump dependencies ([#63](https://github.com/refcell/revm/pull/63))
+- Big Refactor. Machine to Interpreter. refactor instructions. call/create struct ([#52](https://github.com/refcell/revm/pull/52))
+- provide default impl for inspector trait
+- improve docs slightly
+- document unsafe code in stack
+- [revm] pop_top and unsafe comments ([#51](https://github.com/refcell/revm/pull/51))
+- clippy
+- Inspector fixup
+- Bump precompiles to v0.4.0 bump revm v1.2.0
+- [recompl] Bump precompile deps, cargo sort on workspace
+- fix lints
+- cargo fmt
+- [revm_precompiles] added flag for k256 lib
+- [revm] Bump to v1.1.0
+- Bug fix for unknown OpCode
+- internal cleanups
+- remove unneeded comments from DB
+- [revm] output log. Stetetest test log output. fmt
+- Bump versions, Changelogs, fmt, revm readme, clippy.
+- bugfix jumpdest
+- optimize, remove inlines
+- GasBlock for all Spec
+- [revm] Run test multiple times. fmt, BenchmarkDB
+- [revm] wip multiple u256
+- [revm] merge parity u256 with zkpu256
+- [revm][perf] GasBlock analazis and optimizations.
+- handle empty contract
+- wip
+- [revm] precalculated gas blocks
+- [revme][bugfix] fix PC opcode from previous commit
+- [revm] Optimize PC, some perf
+- [revme][debugger] stack pop/push
+- [revme][debug] some print cli
+- readme. debuger update
+- [revm] Rename Handler to Host
+- [revm] Simplified host inspector
+- [revme] initial commit. Cmd skeleton added.statetests moved
+- Multiple changes: web3 db, debugger initial commit, precompile load
+- [revm][insp] now can derail inner_call
+- revm v0.5 readme
+- Bump revm v0.5, precompiles v0.3. some Cleanup
+- [revm][perf] push slice optimized
+- [revm][perf] memory set optimized
+- [revm][perf] mload as slice
+- Optimize memory calculation
+- Memory to usize, clippy,fmt
+- wip optimize i256
+- TEMP switch stacks H256 with U256
+- replace xx::zero() with is_zero()
+- [revm][perf] Error refactor to Return ([#9](https://github.com/refcell/revm/pull/9))
+- [revm][perf] remove u8 casting
+- god clippy accepts our sacrifice.
+- [revm] some perfs
+- [revm] Perfs stack pop. Benchmark snailtracer.
+- fmt
+- [revm] Bump auto_impl to v0.5
+- [revm] cleanup
+- [revm] Rename opcode to instruction. Opcode is u8 now
+- [revm] NO_GAS_MEASURING feature. inline always opcodes
+- [revm] USE_GAS added in Spec
+- Remove ethereumjs-util js file
+- Bump v1. cleanup, changelogs.
+- [revmjs] evm functions added. still need to debug example
+- LICENSE. wasm example
+- fmt
+- [wasm] simple example
+- [revm] fix build. Hashbrown features
+- wip wasm. Remove parity-crypto for secp256k1 and made it as feature.
+- wip wasm
+- Database traits made useful.
+- EVM Interface changed. Inspector called separately
+- [revm] tweak
+- Bump revm v0.3.1
+- unused imports
+- fmt
+- Bump revm v0.3.0. README updated
+- DB ref mut polished
+- And now we debug
+- [revm] Interface. Inspector added, Env cleanup. revm-test passes
+- BIG interface change
+- no_sdt to no_std
+- [precompiles] spelling, small cleanup
+- README, CHANGELOG added for revm crate
+- Bump revm to v0.2.1
+- Precompiles readme. fix for workspace
+- BIG reorg. workspace added. revm-precompile lib
+- readme
+- Add time elapsed for tests
+- readme updated
+- Include Basefee into cost calc. readme change
+- Initialize precompile accounts
+- Status update. Taking a break
+- Merkle calc. Tweaks and debugging for eip158
+- Replace aurora bn lib with parity's. All Bn128Add/Mul/Pair tests passes
+- TEMP
+- one tab removed
+- readme
+- README Example simplified
+- Gas calculation for Call/Create. Example Added
+- readme usage
+- README changes
+- Static gas cost added
+- Subroutine changelogs and reverts
+- Readme postulates
+- Spelling
+- Restructure project
+- First iteration. Machine is looking okay
+
 ## [14.0.1](https://github.com/bluealloy/revm/compare/revm-v14.0.0...revm-v14.0.1) - 2024-08-30
 
 ### Other
